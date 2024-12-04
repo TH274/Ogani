@@ -19,7 +19,7 @@ Clone the repository:
 
 bash
 Copy code
-git clone https://github.com/yourusername/Ogani.git
+git clone https://github.com/TH274/Ogani.git
 Navigate to the project directory:
 
 bash
