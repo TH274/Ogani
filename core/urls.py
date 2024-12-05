@@ -4,8 +4,7 @@ from core import views
 app_name = "core"
 
 urlpatterns = [
-    path("", views.index ),
-    path("index.html", views.index, name = 'index'),
+    path("", views.index, name ='index'),
     path('shop-grid.html', views.shop_grid, name='shop_grid'),
     path('shop-details.html', views.shop_details, name='shop_details'),
     path('shoping-cart.html', views.shoping_cart, name='shoping_cart'),
