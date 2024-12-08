@@ -9,7 +9,7 @@
 <body>
   <div class="wrapper">
     <h2>Registration</h2>
-    <form method="POST" action="{% url 'userauths:sign-up' %}">
+    <form method="POST" action="">
       {% csrf_token %}
       {{ form.as_p }}
       <div class="policy">
