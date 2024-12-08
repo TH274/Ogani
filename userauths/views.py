@@ -1,11 +1,14 @@
 from django.shortcuts import redirect, render
 from userauths.forms import UserRegisterForm
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from django.conf import settings
+
+User = settings.AUTH_USER_MODEL
 
 def register_view(request):
     if request.method == "POST":
-        form = UserRegisterForm(request.POST)
+        form = UserRegisterForm(request.POST or None)
         if form.is_valid():
             # Save user with hashed password
             new_user = form.save(commit=False)
@@ -27,4 +30,20 @@ def register_view(request):
 
 
 def login_view(request):
+    force_login = request.GET.get("force", False)
+    if request.user.is_authenticated and not force_login:
+        return redirect("core:index")
+    
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, "Logged in successfully!")
+            return redirect("core:index")
+        else:
+            messages.warning(request, "Invalid email or password.")
+
     return render(request, "userauths/log-in.html")
