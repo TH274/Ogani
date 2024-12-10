@@ -35,7 +35,7 @@ class Category(models.Model):
     title = models.CharField(max_length=100, default="Food")
     image = models.ImageField(upload_to="category", default="category.jpg")
 
-    class meta:
+    class Meta:
         verbose_name_plural = "categories" 
 
     def category_image(self):
@@ -61,7 +61,7 @@ class Vendor(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
-    class meta:
+    class Meta:
         verbose_name_plural = "Vendors" 
 
     def vendor_image(self):
@@ -97,7 +97,7 @@ class Product(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(null=True, blank=True)
 
-    class meta:
+    class Meta:
         verbose_name_plural = "Products" 
 
     def product_image(self):
@@ -115,7 +115,7 @@ class ProductImages(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     date = models.DateTimeField(auto_now_add=True)
 
-    class meta:
+    class Meta:
         verbose_name_plural = "Products Images" 
 
 
@@ -127,7 +127,7 @@ class CartOrder(models.Model):
     order_date = models.DateTimeField(auto_now_add=True)
     product_status = models.CharField(choices=STATUS_CHOICE, max_length=30, default="processing")
 
-    class meta:
+    class Meta:
         verbose_name_plural = "Cart Order" 
         
 class CartOrderItems(models.Model):
@@ -140,7 +140,7 @@ class CartOrderItems(models.Model):
     price = models.DecimalField(max_digits=999999999999, decimal_places=2, default="1.99")
     total = models.DecimalField(max_digits=999999999999, decimal_places=2, default="1.99")
 
-    class meta:
+    class Meta:
         verbose_name_plural = "Cart Order Items"
 
     def order_img(self):
@@ -154,7 +154,7 @@ class ProductReview(models.Model):
     rating = models.IntegerField(choices=RATING, default=None)
     date = models.DateTimeField(auto_now_add=True)
 
-    class meta:
+    class Meta:
         verbose_name_plural = "Product Review" 
 
     def __str__(self):
@@ -169,7 +169,7 @@ class wishlist(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     date = models.DateTimeField(auto_now_add=True)
 
-    class meta:
+    class Meta:
         verbose_name_plural = "wishlists" 
 
     def __str__(self):
