@@ -44,8 +44,6 @@ class Category(models.Model):
     def __str__(self):
         return self.title
     
-class Tags():
-    pass
 
 class Vendor(models.Model):
     vid = ShortUUIDField(unique=True, length=10, max_length=20, prefix="ven", alphabet="abcdefgh12345")
@@ -85,8 +83,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=999999999999, decimal_places=2, default="1.99")
     old_price = models.DecimalField(max_digits=999999999999, decimal_places=2, default="2.99")
 
-    specification = models.DecimalField(null=True, blank=True)
-    tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
+    specification = models.TextField(null=True, blank=True)
 
     product_status = models.CharField(choices=STATUS, max_length=10, default="in_review")
 
@@ -172,11 +169,13 @@ class wishlist(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     class meta:
-        verbose_name_plurel = "Product Review" 
+        verbose_name_plurel = "wishlists" 
 
     def __str__(self):
         return self.product.title
-    
-    def get_rating(self):
-        return self.rating
+
+class Address(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    address = models.CharField(max_length=100, null=True)
+    status = models.BigIntegerField(default=False)
 
