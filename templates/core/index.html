@@ -287,6 +287,7 @@
                 </div>
             </div>
             <div class="row featured__filter">
+                {% for p in products %}
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-1.jpg' %}">
@@ -302,6 +303,7 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}
                 <!-- <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="{% static 'img/featured/feature-2.jpg' %}">
