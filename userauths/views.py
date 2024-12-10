@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from userauths.forms import UserRegisterForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.conf import settings
 
@@ -10,7 +10,6 @@ def register_view(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST or None)
         if form.is_valid():
-            # Save user with hashed password
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data["password1"])
             new_user.save()
@@ -18,7 +17,6 @@ def register_view(request):
             username = form.cleaned_data.get("username")
             messages.success(request, f"Hey {username}, Your account was created successfully!")
 
-            # Login the user directly
             login(request, new_user)
             return redirect("core:index")
         else:
@@ -42,8 +40,13 @@ def login_view(request):
         if user is not None:
             login(request, user)
             messages.success(request, "Logged in successfully!")
-            return redirect("core:index")
+            return redirect("partials:base")
         else:
             messages.warning(request, "Invalid email or password.")
 
     return render(request, "userauths/log-in.html")
+
+def logout_view(request):
+    logout(request)
+    messages.success(request," You have logged out")
+    return redirect("userauths:sign-in")
