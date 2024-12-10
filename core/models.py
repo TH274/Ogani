@@ -36,7 +36,7 @@ class Category(models.Model):
     image = models.ImageField(upload_to="category", default="category.jpg")
 
     class meta:
-        verbose_name_plurel = "categories" 
+        verbose_name_plural = "categories" 
 
     def category_image(self):
         return mark_safe('<img src="%s" width="50" hight="50" />' % (self.image.url))
@@ -62,7 +62,7 @@ class Vendor(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     class meta:
-        verbose_name_plurel = "Vendors" 
+        verbose_name_plural = "Vendors" 
 
     def vendor_image(self):
         return mark_safe('<img src="%s" width="50" hight="50" />' % (self.image.url))
@@ -98,7 +98,7 @@ class Product(models.Model):
     updated = models.DateTimeField(null=True, blank=True)
 
     class meta:
-        verbose_name_plurel = "Products" 
+        verbose_name_plural = "Products" 
 
     def product_image(self):
         return mark_safe('<img src="%s" width="50" hight="50" />' % (self.image.url))
@@ -116,7 +116,7 @@ class ProductImages(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     class meta:
-        verbose_name_plurel = "Products Images" 
+        verbose_name_plural = "Products Images" 
 
 
 
@@ -128,7 +128,7 @@ class CartOrder(models.Model):
     product_status = models.CharField(choices=STATUS_CHOICE, max_length=30, default="processing")
 
     class meta:
-        verbose_name_plurel = "Cart Order" 
+        verbose_name_plural = "Cart Order" 
         
 class CartOrderItems(models.Model):
     user = models.ForeignKey(CartOrder, on_delete=models.CASCADE)
@@ -140,7 +140,7 @@ class CartOrderItems(models.Model):
     total = models.DecimalField(max_digits=999999999999, decimal_places=2, default="1.99")
 
     class meta:
-        verbose_name_plurel = "Cart Order Items"
+        verbose_name_plural = "Cart Order Items"
 
     def order_img(self):
         return mark_safe('<img src="/media/%s" width="50" hight="50" />' % (self.image))
@@ -154,7 +154,7 @@ class ProductReview(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     class meta:
-        verbose_name_plurel = "Product Review" 
+        verbose_name_plural = "Product Review" 
 
     def __str__(self):
         return self.product.title
@@ -169,7 +169,7 @@ class wishlist(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     class meta:
-        verbose_name_plurel = "wishlists" 
+        verbose_name_plural = "wishlists" 
 
     def __str__(self):
         return self.product.title
