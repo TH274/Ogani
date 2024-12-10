@@ -1,10 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from core.models import Product, CartOrder, Category, Vendor, CartOrderItems, ProductImages, ProductReview, wishlist, Address
 
-# Create your views here.
+
 
 def index(request):
-    return render(request, 'core/index.html')
+    product = Product.objects.all()
+
+    context = {
+        "products": product
+    }
+
+    return render(request, 'core/index.html', context)
 
 def shop_grid(request):
     return render(request, 'core/shop-grid.html')
