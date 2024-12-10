@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import PermissionDenied
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 
@@ -25,6 +26,13 @@ class UserManager(BaseUserManager):
 
     def get_by_natural_key(self, email):
         return self.get(email=email)
+    
+    def delete_superuser(self, user):
+        if not user.is_superuser:
+            raise PermissionDenied("The user is not a superuser.")
+
+        user.delete()
+        return f"Superuser {user.username} has been deleted."
 
 
 class User(AbstractBaseUser, PermissionsMixin):

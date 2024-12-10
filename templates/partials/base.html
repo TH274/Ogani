@@ -50,13 +50,25 @@
                 <div>English</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
-                    <li><a href="#">Spanis</a></li>
+                    <li><a href="#">Spanish</a></li>
                     <li><a href="#">English</a></li>
                 </ul>
             </div>
+
+            <!-- Account Dropdown -->
             <div class="header__top__right__auth">
-                <a href="../userauths/log-in.html"><i class="fa fa-user"></i> Login</a>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <!-- If the user is logged in, show the sign-out option -->
+                        <a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
@@ -121,7 +133,7 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                <a href="{% url 'userauths:logout' %}"><i class="fa fa-user"></i> Logout</a>
                             </div>
                         </div>
                     </div>
@@ -167,7 +179,11 @@
                 <i class="fa fa-bars"></i>
             </div>
             {% if messages %}
-
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}}">
+                        <strong>{{message}}</strong>
+                    </div>
+                {% endfor %}
             {% endif %}
         </div>
     </header>
